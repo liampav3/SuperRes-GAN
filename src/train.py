@@ -54,7 +54,7 @@ lr_gen = .0001
 epochs = 1500
 
 #Building a dataloader for the BSDS200 dataset
-train_ds = ImageFolder('BSDS300/images/train', transform=transforms.Compose([transforms.RandomCrop(96), transforms.ToTensor()]))
+train_ds = ImageFolder('../data/BSDS300/images/train', transform=transforms.Compose([transforms.RandomCrop(96), transforms.ToTensor()]))
 train_dl = DataLoader(train_ds, batch_size=16, shuffle=False, num_workers=4)
 print("Dataset ready")
 
@@ -126,7 +126,10 @@ for epoch in range(epochs):
 
     disc_loss, gen_loss = sum(disc_losses)/len(disc_losses), sum(gen_losses)/len(gen_losses)
     print(f"Epoch {epoch}: \t DISC LOSS: {disc_loss:.5f} \t GEN LOSS: {gen_loss:.5f}")
+    if epoch % 10 == 0:
+        torch.save(generator.cpu(), 'generator_{epoch}.torch')
+        torch.save(discriminator.cpu(), 'discriminator_{epoch}.torch')
 
 generator, discriminator = generator.cpu(), discriminator.cpu()
-torch.save(generator, 'generator.torch')
-torch.save(discriminator, 'discriminator.torch')
+torch.save(generator, 'generator_final.torch')
+torch.save(discriminator, 'discriminator_final.torch')
