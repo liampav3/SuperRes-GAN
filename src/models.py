@@ -1,8 +1,3 @@
-'''
-Liam Pavlovic
-CS7180 Project 1
-9/23/23
-'''
 import torch
 from torch import nn
 

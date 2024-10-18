@@ -1,8 +1,3 @@
-'''
-Liam Pavlovic
-CS7180 Project 1
-9/23/23
-'''
 from models import Generator, Discriminator
 
 import torch
